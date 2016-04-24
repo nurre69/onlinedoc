@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <?php
 session_start();
-	$title = "Ota yhteyttä";
+	$title = "Ota yhteys lääkäriin";
 	include_once 'header2.php';
 if($_SESSION["logged_in"] == 'yes'){
 	include('connection.php');
@@ -14,16 +14,16 @@ if($_SESSION["logged_in"] == 'yes'){
 	header("location: error.php");
 }
 $_SESSION['LAST_ACTIVITY'] = time();
-$admin_email = "niikan@metropolia.fi";
+	$admin_email = "niikan@metropolia.fi";
 	$email = $_SESSION["email"];
 	$subject = $_REQUEST['subject'];
 	$comment = $_REQUEST['message'];
 	if (isset($_POST['send']))
 	{
-	mail($admin_email, $subject, $comment, "From:" . $email);
+	mail($admin_email, "$subject", $comment, "From:" . $email);
 		if (@mail($admin_email, $subject, $comment))
 	{
-		$_SESSION["msg"] = "Viestisi on lähetetty ylläpidolle.";
+		$_SESSION["msg"] = "Viestisi on lähetetty lääkärille, joka on yhteydessä sinuun mahdollisimman pian.";
 	} else {
 		$_SESSION["error"] = "Tapahtui virhe.";
 	}
@@ -67,7 +67,7 @@ if (empty($_SESSION["msg"]))
 <div class="boxsuc suc">
 <span><?php echo $_SESSION["msg"]; unset($_SESSION["msg"]); ?></span>
 </div>
-<h2>Ota yhteyttä palvelun ylläpitoon:</h2><br>
+<h2>Lähetä viesti suoraan lääkärille:</h2><br>
 
 <form method="post" class="basic">
 

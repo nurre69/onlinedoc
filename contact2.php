@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <?php
+	session_start();
+	$title = "Ota yhteyttä";
+	include_once 'header1.php';
 	$admin_email = "niikan@metropolia.fi";
 	$email = $_REQUEST['email'];
 	$subject = $_REQUEST['subject'];
@@ -45,24 +48,6 @@ if (empty($_SESSION["msg"]))
 	<?php
 }
 ?>
-<html lang="en">
-	<head>
-		<title>onlinedoc -lääkäripalvelu</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="css" media="screen" href="tyyli.css" />
-		<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-	</head>
-<body>
-<div class="bg">
-<div style="margin-left: 20%; margin-right: 20%;">
-<img class="c" src="drlogo.png">
-</div>
-<div class="menu"
-<ul class="menu">
-    <li><a href="login.php">> Kirjaudu sisään</a></li>
-	<li><a href="register.php">> Rekisteröidy</a></li>
-</ul>
-</div>
 <div class="data">
 <a class="tooltip" href="#"><img src="question.png"><span>Kirjoita sähköpostiosoitteesi sekä viestisi ylläpidolle ja paina 'Lähetä'!</span></a>
 </span>
@@ -90,15 +75,6 @@ if (empty($_SESSION["msg"]))
 	</div>
 </form>
 </div>
-<div class="menu"
-<ul class="menu">
-    <li><a href="about2.php">> Tietoa meistä</a></li>
-	<li><a href="contact2.php"><span class="active">>Ota yhteyttä</span></a></li>
-</ul>
-</div>
-<footer>
-Page created by Metropolia Hyte Ryhmä 6: Nurmimaa, Kuutti, Pakkala. © 2016 
-</footer>
-</div>
-</body>
-</html>
+<?php
+include_once 'footer1.php';
+?>

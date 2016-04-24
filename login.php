@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
+$title = "Kirjaudu sisään";
+include_once 'header1.php';
 include('connection.php');
 function test_input($data) 
 {
@@ -9,14 +11,12 @@ function test_input($data)
 	$user = htmlspecialchars($data);
 	return $data;
 }
-
 	$user = $_POST["username"];
 	$pw = $_POST["password"];
 	
 	$sql = "SELECT * FROM person WHERE typeid = 0";
 	
 	$result = $conn->query($sql);
-
 	if($result->num_rows > 0) 
 	{
 		while($row = $result->fetch_assoc()) 
@@ -60,26 +60,8 @@ if (empty($_SESSION["error"]))
 	<?php
 }
 ?>
-<html lang="en">
-	<head>
-		<title>onlinedoc -lääkäripalvelu</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="css" media="screen" href="tyyli.css" />
-		<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-	</head>
-<body>
-<div class="bg">
-<div style="margin-left: 20%; margin-right: 20%;">
-<img src="drlogo.png" class="c">
-</div>
-<div class="menu"
-<ul class="menu">
-    <li><a href="login.php"><span class="active">> Kirjaudu sisään</span></a></li>
-	<li><a href="register.php">> Rekisteröidy</a></li>
-</ul>
-</div>
 <div class="data">
-<a class="tooltip" href="#"><img src="question.png"><span>Syötä käyttäjätunnus ja salasana. Jos sinulla ei ole tunnuksia, voit rekisteröityä 'Rekisteröidy' linkistä.</span></a>
+<a class="tooltip" href="#"><img src="question.png" class="ohje"><span>Syötä käyttäjätunnus ja salasana. Jos sinulla ei ole tunnuksia, voit rekisteröityä 'Rekisteröidy' linkistä.</span></a>
 <div class="boxerr err">
 <span>Virhe: </span><?php echo $_SESSION["error"]; unset($_SESSION["error"]); ?>
 </div>
@@ -98,15 +80,6 @@ if (empty($_SESSION["error"]))
 	<br><p>Unohtuiko salasana? <a href="forgot.php">Paina tästä saadaksesi uuden.</a></p>
 </div>
 </div>
-<div class="menu"
-<ul class="menu">
-    <li><a href="about2.php">> Tietoa meistä</a></li>
-	<li><a href="contact2.php">> Ota yhteyttä</a></li>
-</ul>
-</div>
-<footer>
-Page created by Metropolia Hyte Ryhmä 6: Nurmimaa, Kuutti, Pakkala. © 2016 
-</footer>
-</div>
-</body>
-</html>
+<?php
+include_once 'footer1.php';
+?>

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
+	$title = "Hae mittaustuloksia";
+	include_once 'header2.php';;
 if($_SESSION["logged_in"] == 'yes'){
 	include('connection.php');
 
@@ -13,7 +15,6 @@ if($_SESSION["logged_in"] == 'yes'){
 	header("location: error.php");
 }
 $_SESSION['LAST_ACTIVITY'] = time();
-
 function test_input($data) 
 {
 	$data = trim($data);
@@ -24,15 +25,15 @@ function test_input($data)
 	include 'connection.php';
 	$typeid = $_POST["mittari"];
 	$ssn = $_SESSION["ssn"];
+	$limit = $_POST["raja"];
 
 	if($typeid == '1') 
 	{
-		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m.timestamp AS Aika
+		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m_t.measurement_name, m.timestamp AS Aika
 				FROM measurements m 
 				INNER JOIN measurement_type m_t ON m.typeid = m_t.typeid
 				where m.ssn = '$ssn' and m.typeid = 1
-				ORDER BY m.timestamp DESC
-				LIMIT 5";
+				ORDER BY m.timestamp DESC";
 				
 		$result = $conn->query($sql);
 
@@ -40,10 +41,11 @@ function test_input($data)
 		{
 			while($row = $result->fetch_assoc()) 
 			{	
+					$mittaus = "Verensokeri:";
 					$aika = $row["Aika"];
-					$aika = date("d.m.Y H.m.s", strtotime($aika));
+					$aika = date("d.m.Y H.i.s", strtotime($aika));
 					$aika = explode(" ", $aika);
-					$arvo = "Verensokeri ".$row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
+					$arvo = $row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
 					$summa[] = $arvo;
 			}
 			$tulos = implode($summa);
@@ -51,12 +53,11 @@ function test_input($data)
 	}	
 	elseif($typeid == '2') 
 	{
-		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m.timestamp AS Aika
+		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m_t.measurement_name, m.timestamp AS Aika
 				FROM measurements m 
 				INNER JOIN measurement_type m_t ON m.typeid = m_t.typeid
 				where m.ssn = '$ssn' and m.typeid = 2
-				ORDER BY m.timestamp DESC
-				LIMIT 5";
+				ORDER BY m.timestamp DESC";
 				
 		$result = $conn->query($sql);
 
@@ -64,10 +65,11 @@ function test_input($data)
 		{
 			while($row = $result->fetch_assoc()) 
 			{	
+					$mittaus = "Verenpaine:";
 					$aika = $row["Aika"];
-					$aika = date("d.m.Y H.m.s", strtotime($aika));
+					$aika = date("d.m.Y H.i.s", strtotime($aika));
 					$aika = explode(" ", $aika);
-					$arvo = "Verenpaine ".$row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
+					$arvo = $row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
 					$summa[] = $arvo;
 			}
 			$tulos = implode($summa);
@@ -75,12 +77,11 @@ function test_input($data)
 	}	
 	elseif($typeid == '3') 
 	{
-		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m.timestamp AS Aika
+		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m_t.measurement_name, m.timestamp AS Aika
 				FROM measurements m 
 				INNER JOIN measurement_type m_t ON m.typeid = m_t.typeid
 				where m.ssn = '$ssn' and m.typeid = 3
-				ORDER BY m.timestamp DESC
-				LIMIT 5";
+				ORDER BY m.timestamp DESC";
 				
 		$result = $conn->query($sql);
 
@@ -88,10 +89,11 @@ function test_input($data)
 		{
 			while($row = $result->fetch_assoc()) 
 			{	
+					$mittaus = "Lämpötila:";
 					$aika = $row["Aika"];
-					$aika = date("d.m.Y H.m.s", strtotime($aika));
+					$aika = date("d.m.Y H.i.s", strtotime($aika));
 					$aika = explode(" ", $aika);
-					$arvo = "Lämpötila ".$row["Arvo"]." &deg".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
+					$arvo = $row["Arvo"]." &deg".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
 					$summa[] = $arvo;
 			}
 			$tulos = implode($summa);
@@ -99,12 +101,11 @@ function test_input($data)
 	}	
 	elseif($typeid == '4') 
 	{
-		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m.timestamp AS Aika
+		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m_t.measurement_name, m.timestamp AS Aika
 				FROM measurements m 
 				INNER JOIN measurement_type m_t ON m.typeid = m_t.typeid
 				where m.ssn = '$ssn' and m.typeid = 5
-				ORDER BY m.timestamp DESC
-				LIMIT 5";
+				ORDER BY m.timestamp DESC";
 				
 		$result = $conn->query($sql);
 
@@ -112,10 +113,11 @@ function test_input($data)
 		{
 			while($row = $result->fetch_assoc()) 
 			{	
+					$mittaus = "Paino:";
 					$aika = $row["Aika"];
-					$aika = date("d.m.Y H.m.s", strtotime($aika));
+					$aika = date("d.m.Y H.i.s", strtotime($aika));
 					$aika = explode(" ", $aika);
-					$arvo = "Paino ".$row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
+					$arvo = $row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
 					$summa[] = $arvo;
 			}
 			$tulos = implode($summa);
@@ -123,12 +125,35 @@ function test_input($data)
 	}	
 	elseif($typeid == '5') 
 	{
-		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m.timestamp AS Aika
+		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m_t.measurement_name, m.timestamp AS Aika
 				FROM measurements m 
 				INNER JOIN measurement_type m_t ON m.typeid = m_t.typeid
 				where m.ssn = '$ssn' and m.typeid = 6
-				ORDER BY m.timestamp DESC
-				LIMIT 5";
+				ORDER BY m.timestamp DESC";
+				
+		$result = $conn->query($sql);
+
+		if($result->num_rows > 0) 
+		{
+			while($row = $result->fetch_assoc()) 
+			{	
+					$mittaus = "Pituus:";
+					$aika = $row["Aika"];
+					$aika = date("d.m.Y H.i.s", strtotime($aika));
+					$aika = explode(" ", $aika);
+					$arvo = $row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
+					$summa[] = $arvo;
+			}
+			$tulos = implode($summa);
+		}
+	}
+	elseif($typeid == '6') 
+	{
+		$sql = "SELECT m.value AS Arvo, m_t.measurement_unit, m_t.measurement_name, m.timestamp AS Aika
+				FROM measurements m 
+				INNER JOIN measurement_type m_t ON m.typeid = m_t.typeid
+				where m.ssn = '$ssn'
+				ORDER BY m_t.typeid";
 				
 		$result = $conn->query($sql);
 
@@ -137,9 +162,26 @@ function test_input($data)
 			while($row = $result->fetch_assoc()) 
 			{	
 					$aika = $row["Aika"];
-					$aika = date("d.m.Y H.m.s", strtotime($aika));
+					$mittaus = "Kaikki tiedot:";
+					$mittaust = $row["measurement_name"];
+					if ($row["measurement_name"] == "glucose"){
+						$mittaust = "Verensokeri:";
+					} elseif ($row["measurement_name"] == "pressure"){
+						$mittaust = "Verenpaine:";
+					} elseif ($row["measurement_name"] == "temperature"){
+						$mittaust = "Lämpötila:";
+					} elseif ($row["measurement_name"] == "weight"){
+						$mittaust = "Paino:";
+					} elseif ($row["measurement_name"] == "height"){
+						$mittaust = "Pituus:";
+					}
+					$aika = date("d.m.Y H.i.s", strtotime($aika));
 					$aika = explode(" ", $aika);
-					$arvo = "Pituus ".$row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
+					if ($row["measurement_name"] == "temperature"){
+						$arvo = $mittaust." ".$row["Arvo"]."&deg".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
+					} else {
+					$arvo = $mittaust." ".$row["Arvo"]." ".$row["measurement_unit"].", mitattu: ". $aika[0].", klo: ".$aika[1]."<br>";
+					}
 					$summa[] = $arvo;
 			}
 			$tulos = implode($summa);
@@ -161,44 +203,31 @@ if (empty($tulos))
 	<?php
 }
 ?>
-<html lang="en">
-	<head>
-		<title>onlinedoc -lääkäripalvelu</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="css" media="screen" href="tyyli.css" />
-		<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-	</head>
-<body>
-<div class="bg">
-<div style="margin-left: 20%; margin-right: 20%;">
-<img class="c" src="drlogo.png">
-</div>
-<div class="menu"
-<ul class="menu">
-	<li><a href="home.php">> Etusivu</a></li>
-	<li><a href="#"><span class="active">> Mittaustulokset</span></a>
-		<ul>
-		<li><a href="insert.php">> Syötä mittaustuloksia</a></li>
-		<li><a href="search.php">> Hae mittaustuloksia</a></li>
-		</ul>
-	</li>
-	<li><a href="service.php">> Tulosten tulkinta</a></li>
-	<li><a href="profile.php">> Henkilötiedot</a></li>
-	<li style="float: right;"><a href="logout.php">> Kirjaudu ulos</a></li>
-</ul>
-</div>
 <div class="data">
 <a class="tooltip" href="#"><img src="question.png"><span>Valitse mittaustyyppi, jota haluat tarkastella ja paina 'Hae tiedot'!</span></a>
 <div class="cc">
 <h2>Mittaustietojen haku: </h2>
 				<form action="#" method="post" class="basic2">
 		<label for="mittari">Mittauksen tyyppi: </label>
-		<select size="1" class="perus" name="mittari">
-						<option value="1">Verensokeri</option>
-						<option value="2">Verenpaine</option>
-						<option value="3">Lämpötila</option>
-						<option value="4">Paino</option>
-						<option value="5">Pituus</option>	
+		<select name="mittari">
+						<option value="1" <?php if(isset($_POST['mittari']) && $_POST['mittari'] == '1') 
+         echo 'selected= "selected"';
+          ?>>Verensokeri</option>
+						<option value="2" <?php if(isset($_POST['mittari']) && $_POST['mittari'] == '2') 
+         echo 'selected= "selected"';
+          ?>>Verenpaine</option>
+						<option value="3" <?php if(isset($_POST['mittari']) && $_POST['mittari'] == '3') 
+         echo 'selected= "selected"';
+          ?>>Lämpötila</option>
+						<option value="4" <?php if(isset($_POST['mittari']) && $_POST['mittari'] == '4') 
+         echo 'selected= "selected"';
+          ?>>Paino</option>
+						<option value="5" <?php if(isset($_POST['mittari']) && $_POST['mittari'] == '5') 
+         echo 'selected= "selected"';
+          ?>>Pituus</option>
+						<option value="6" <?php if(isset($_POST['mittari']) && $_POST['mittari'] == '6') 
+         echo 'selected= "selected"';
+          ?>>Kaikki tiedot</option>	
 					</select>
 					<div class="bc">
 					<button type="submit" class="button-minimal">Hae tiedot</button>
@@ -207,18 +236,21 @@ if (empty($tulos))
 			</form>
 			</div>
 <div class="laatikko2">
+<p class="arvo">
+<?php echo $mittaus; ?>
+</p>
 <?php echo $tulos; ?>
 </div>			
 </div>
-<div class="menu"
+<nav>
 <ul class="menu">
     <li><a href="about.php">> Tietoa meistä</a></li>
 	<li><a href="contact.php">> Ota yhteyttä</a></li>
 	<li style="float: right;"><p>Kirjautuneena: <?php echo $_SESSION["fn"] . " " . $_SESSION["ln"]; ?></p></li>
 </ul>
-</div>
+</nav>
 <footer>
-Page created by Metropolia Hyte Ryhmä 6: Nurmimaa, Kuutti, Pakkala. © 2016 
+Page created by Metropolia Hyte Ryhmä 6: Nurmimaa, Kuutti, Pakkala. © 2016
 </footer>
 </div>
 </body>
