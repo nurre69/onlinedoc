@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <?php
 session_start();
+	$title = "Anna palautetta";
+	include_once 'header2.php';
 if($_SESSION["logged_in"] == 'yes'){
 	include('connection.php');
 
@@ -14,66 +16,35 @@ if($_SESSION["logged_in"] == 'yes'){
 }
 $_SESSION['LAST_ACTIVITY'] = time();
 
-$_SESSION["message"] = "Kiitos vastauksestasi.";
-if(isset($_POST['submit'])) {
-echo $_SESSION["message"];
-echo $_SESSION["error"];
-}
+$admin_email = "niikan@metropolia.fi";
+	$email = $_SESSION["email"];
+	$subject = "Palaute";
+	$comment = $_REQUEST['message'];
+	if (isset($_POST['send']))
+	{
+	mail($admin_email, $subject, $comment, "From:" . $email);
+	}
 ?>
-<html lang="en">
-	<head>
-		<title>onlinedoc -lääkäripalvelu</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="css" media="screen" href="tyyli.css" />
-		<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
-	</head>
-<body>
-<div class="bg">
-<div style="margin-left: 20%; margin-right: 20%;">
-<img class="c" src="drlogo.png">
-</div>
-<div class="menu"
-<ul class="menu">
-	<li><a href="home.php">> Etusivu</a></li>
-		<li><a href="#">> Mittaustulokset</a>
-		<ul>
-		<li><a href="insert.php">> Syötä mittaustuloksia</a></li>
-		<li><a href="search.php">> Hae mittaustuloksia</a></li>
-		</ul>
-	</li>
-	<li><a href="service.php">> Tulosten tulkinta</a></li>
-	<li><a href="profile.php">> Henkilötiedot</a></li>
-	<li style="float: right;"><a href="logout.php">> Kirjaudu ulos</a></li>
-</ul>
-</div>
 <div class="data">
 <a class="tooltip" href="#"><img src="question.png"><span>Täytä palautelomake ja paina 'Lähetä'!</span></a>
+<div class="cc">
 <form action="#" method="post" id="feedback">
-Olitko tyytyväinen palveluun?
+<p>Olitko tyytyväinen palveluun?
 <label><input type="radio" name="service" id="yes" value="yes">Kyllä</label>
 <label><input type="radio" name="service" id="no" value="no">Ei</label><br><br>
 Mistä sait tietää palvelusta?
-<select form="feedback">
+<select class="basic2" form="feedback">
 	<option value="friend">Kaverilta</option>
 	<option value="social">Sosiaalisesta mediasta</option>
 	<option value="tv">Televisiosta</option>
 </select><br><br>
 Muuta kommentoitavaa:<br>
-<textarea autofocus style="resize: none; margin-left; auto; margin-right: auto;" form="feedback" rows="7" cols="60"></textarea><br>
-<button type="button" onclick="location.href='final.php'" class="button-minimal">Lähetä</button>
+<textarea autofocus style="resize: none; margin-left; auto; margin-right: auto;" form="feedback" name="message" rows="7" cols="45"></textarea><br><br>
+<button type="button" onclick="location.href='final.php'" class="button-minimal" name="send">Lähetä</button>
 <button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
 </form>
 </div>
-<div class="menu"
-<ul class="menu">
-    <li><a href="about.php">> Tietoa meistä</a></li>
-	<li><a href="contact.php">> Ota yhteyttä</a></li>
-	<li style="float: right;"><p>Kirjautuneena: <?php echo $_SESSION["fn"] . " " . $_SESSION["ln"]; ?></p></li>
-</ul>
 </div>
-<footer>
-Page created by Metropolia Hyte Ryhmä 6: Nurmimaa, Kuutti, Pakkala. © 2016 
-</footer>
-</div>
-</body>
-</html>
+<?php
+include_once 'footer2.php';
+?>

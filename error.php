@@ -3,7 +3,7 @@
 	<head>
 		<title>onlinedoc -lääkäripalvelu</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="css" media="screen" href="tyyli.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="tyyli.css" />
 		<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	</head>
 <body>

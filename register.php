@@ -2,7 +2,6 @@
 <?php
 	session_start();
 	include 'connection.php';
-
 	$last = $_POST["lastname"];
 	$first = $_POST["firstname"];
 	$ssn = $_POST["ssn"];
@@ -76,21 +75,18 @@ if (empty($_SESSION["msg"]))
 	<head>
 		<title>onlinedoc -lääkäripalvelu</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<link rel="stylesheet" type="css" media="screen" href="tyyli.css" />
+		<link rel="stylesheet" type="text/css" media="screen" href="tyyli.css" />
 		<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
 	</head>
 <body>
 <div class="bg">
-<div style="margin-left: 20%; margin-right: 20%;">
 <img class="c" src="drlogo.png">
-</div>
-<div class="menu"
+<nav>
 <ul class="menu">
     <li><a href="login.php">> Kirjaudu sisään</a></li>
 	<li><a href="register.php"><span class="active">> Rekisteröidy</span></a></li>
 </ul>
-</div>
-
+</nav>
 <div class="data">
 <a class="tooltip" href="#"><img src="question.png"><span>Täytä kaikki kentät ja paina 'Lähetä tiedot'!</span></a>
 <div class="boxsuc suc">
@@ -146,12 +142,12 @@ if (empty($_SESSION["msg"]))
 </div>
 </div>
 </div>
-<div class="menu"
+<nav>
 <ul class="menu">
     <li><a href="about2.php">> Tietoa meistä</a></li>
 	<li><a href="contact2.php">> Ota yhteyttä</a></li>
 </ul>
-</div>
+</nav>
 <footer>
 Page created by Metropolia Hyte Ryhmä 6: Nurmimaa, Kuutti, Pakkala. © 2016 
 </footer>
