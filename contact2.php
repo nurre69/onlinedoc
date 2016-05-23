@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 	session_start();
 	$title = "Ota yhteyttä";
@@ -17,63 +16,50 @@
 		$_SESSION["error"] = "Tapahtui virhe, tarkistahan syöttämästi sähköpostiosoitteen.";
 	}
 	}
-if (empty($_SESSION["error"]))
-{
-	?>
-	<style type="text/css">
-	.boxerr { display:none; }
-	</style>
-	<?php
-} else 
-{
-	?>
-	<style type="text/css">
-	.boxerr { display:inline; }
-	</style>
-	<?php
-}
-if (empty($_SESSION["msg"]))
-{
-	?>
-	<style type="text/css">
-	.boxsucc { display:none; }
-	</style>
-	<?php
-} else 
-{
-	?>
-	<style type="text/css">
-	.boxsucc { display:inline; }
-	</style>
-	<?php
-}
 ?>
 <div class="data">
-<a class="tooltip" href="#"><img src="question.png"><span>Kirjoita sähköpostiosoitteesi sekä viestisi ylläpidolle ja paina 'Lähetä'!</span></a>
-</span>
+<a class="tooltip" href="#"><img alt="Ohje!" src="question.png"><span>Kirjoita sähköpostiosoitteesi sekä viestisi ylläpidolle ja paina 'Lähetä'!</span></a>
+<?php
+if (!empty($_SESSION["error"]))
+{
+	?>
+<div class="bc">
 <div class="boxerr err">
 <span><?php echo $_SESSION["error"]; unset($_SESSION["error"]); ?></span>
-</div>
-<div class="boxsucc suc">
+</div></div>
+<?php }
+?>
+<?php
+if (!empty($_SESSION["msg"]))
+{
+	?>
+<div class="bc">
+<div class="boxsuc suc">
 <span><?php echo $_SESSION["msg"]; unset($_SESSION["msg"]); ?></span>
-</div>
+</div></div>
+<?php }
+?>
 <h2>Ota yhteyttä palvelun ylläpitoon:</h2><br>
-
-<form method="post" class="basic">
+<div class="cc">
+<form method="post" class="minimal">
 	<label for="email">Sähköpostisi: </label>
-	<input type="email" name="email" required>
-
+	<input type="email" name="email" id="email" required>
 	<label for="subject">Aihe: </label>
-	<input type="text" name="subject" required>
+	<select size="1" name="subject" id="subject">
+	<option value="Ongelma palvelussa">Ongelma palvelussa</option>
+	<option value="Palaute">Palaute</option>
+	<option value="Muuta">Muuta</option>
+	</select>
 
 	<label for="message">Viesti: </label>
-	<textarea autofocus style="resize: none; margin-left; auto; margin-right: auto; margin-top: 12px;" name="message" rows="7" cols="60" required></textarea><br><br>
+	<textarea autofocus class="minimal" id="message" name="message" rows="7" cols="60" required></textarea><br><br>
 
 	<div class="bc">
-	<button type="submit" class="button-minimal" name="send">Lähetä</button>
-	<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+	<button type="submit" class="button-minimal" name="send"><i class="fa fa-reply" aria-hidden="true"></i> Lähetä viesti</button>
+	<button type="button" class="button-minimal" onclick="history.go(-1);return true;"><i class="fa fa-history" aria-hidden="true"></i> Takaisin</button>
 	</div>
 </form>
+</div>
 </div>
 <?php
 include_once 'footer1.php';

@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 	$title = "Muuta henkilötietojasi";
@@ -43,7 +42,7 @@ function test_input($data)
 	if($first && $last && $addr && $email && $user && $pw) 
 	{		
 		
-		$sql1 = "UPDATE person
+		$sql1 = "UPDATE users
 					SET firstname = '$first', lastname = '$last', username = '$user', password = '$pw',
 						address = '$addr', email = '$email'
 					WHERE ssn = '$ssn'";
@@ -112,32 +111,32 @@ if (empty($_SESSION["msg"]))
 	<ul>
 		<li>
 			<label for="firstname">Etunimi:</label>
-			<input type="text" name="firstname" pattern="[A-Öa-ö -]+" value="<?php echo $_SESSION['fn']; ?>" required/><span class="req">Etunimi saa sisältää vain kirjaimia.</span>
+			<input type="text" name="firstname" id="firstname" pattern="[A-Öa-ö -]+" value="<?php echo $_SESSION['fn']; ?>" required/><span class="req">Etunimi saa sisältää vain kirjaimia.</span>
 		</li>
 		<li>
 			<label for="lastname">Sukunimi:</label>
-			<input type="text" name="lastname" pattern="[A-Öa-ö -]+" value="<?php echo $_SESSION['ln']; ?>" required/><span class="req">Sukunimi saa sisältää vain kirjaimia.</span>
+			<input type="text" name="lastname" id="lastname" pattern="[A-Öa-ö -]+" value="<?php echo $_SESSION['ln']; ?>" required/><span class="req">Sukunimi saa sisältää vain kirjaimia.</span>
 		</li>
 		<li>
 			<label for="address">Osoite:</label>
-			<input type="text" name="address" pattern="([A-Öa-ö -]+)([0-9]{1,3}) ([A-Z]) ([0-9]{1,3})|([A-Öa-ö -]+)([0-9]{1,3})" value="<?php echo $_SESSION['address']; ?>" required/><span class="req">Virheellinen osoite.</span>
+			<input type="text" name="address" id="address" pattern="([A-Öa-ö -]+)([0-9]{1,3}) ([A-Z]) ([0-9]{1,3})|([A-Öa-ö -]+)([0-9]{1,3})" value="<?php echo $_SESSION['address']; ?>" required/><span class="req">Virheellinen osoite.</span>
 		</li>
 		<li>
 			<label for="email">Sähköpostiosoite:</label>
-			<input type="email" name="email" value="<?php echo $_SESSION['email']; ?>" required/><span class="req">Virheellinen sähköpostiosoite.</span>
+			<input type="email" name="email" id="email" value="<?php echo $_SESSION['email']; ?>" required/><span class="req">Virheellinen sähköpostiosoite.</span>
 		</li>
 		<li>
 			<label for="username">Käyttäjätunnus:</label>
-			<input type="text" name="username" pattern="[A-Öa-ö]{5,10}" value="<?php echo $_SESSION['user']; ?>" required/><span class="req">Käyttäjätunnuksen täytyy olla 5-10 merkkiä pitkä ja sisältää vain kirjaimia.</span>
+			<input type="text" name="username" id="username" pattern="[A-Öa-ö]{5,10}" value="<?php echo $_SESSION['user']; ?>" required/><span class="req">Käyttäjätunnuksen täytyy olla 5-10 merkkiä pitkä ja sisältää vain kirjaimia.</span>
 		</li>
 		<li>
 			<label for="password">Salasana:</label>
-			<input type="text" name="password" pattern="[A-Öa-ö]{5,20}[0-9]{1,20}|[0-9]{1,20}[A-Öa-ö]{5,20}" value="<?php echo $_SESSION['password']; ?>" required/><span class="req">Salasanassa täytyy olla vähintään 5 kirjainta ja yksi numero.</span>
+			<input type="text" name="password" id="password" pattern="[A-Öa-ö]{5,20}[0-9]{1,20}|[0-9]{1,20}[A-Öa-ö]{5,20}" value="<?php echo $_SESSION['password']; ?>" required/><span class="req">Salasanassa täytyy olla vähintään 5 kirjainta ja yksi numero.</span>
 		</li>
 	</ul><br>
 	<div class="bc">
-	<button type="submit" class="button-minimal">Päivitä tiedot</button>	
-	<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+	<button type="submit" class="button-minimal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Tallenna tiedot</button>
+	<button type="button" class="button-minimal" onclick="history.go(-1);return true;"><i class="fa fa-history" aria-hidden="true"></i> Takaisin</button>
 	</div>
 </form>
 </div>

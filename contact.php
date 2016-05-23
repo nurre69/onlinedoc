@@ -68,20 +68,25 @@ if (empty($_SESSION["msg"]))
 <span><?php echo $_SESSION["msg"]; unset($_SESSION["msg"]); ?></span>
 </div>
 <h2>Ota yhteyttä palvelun ylläpitoon:</h2><br>
-
-<form method="post" class="basic">
+<div class="cc">
+<form method="post" class="minimal">
 
 	<label for="subject">Aihe: </label>
-	<input type="text" name="subject" required>
+	<select size="1" name="subject" id="subject" tabindex="1">
+	<option value="Ongelma palvelussa">Ongelma palvelussa</option>
+	<option value="Palaute">Palaute</option>
+	<option value="Muuta">Muuta</option>
+	</select>
 
 	<label for="message">Viesti: </label>
-	<textarea autofocus style="resize: none; margin-left; auto; margin-right: auto; margin-top: 12px;" name="message" rows="7" cols="60" required></textarea><br><br>
+	<textarea autofocus class="minimal" name="message" rows="7" cols="60" required id="message" tabindex="2"></textarea><br><br>
 
 	<div class="bc">
-	<button type="submit" class="button-minimal" name="send">Lähetä</button>
-	<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+	<button type="submit" class="button-minimal" name="send" tabindex="3"><i class="fa fa-reply" aria-hidden="true"></i> Lähetä viesti</button>
+	<button type="button" class="button-minimal" tabindex="4" onclick="history.go(-1);return true;"><i class="fa fa-history" aria-hidden="true"></i> Takaisin</button>
 	</div>
 </form>
+</div>
 </div>
 <?php
 include_once 'footer2.php';

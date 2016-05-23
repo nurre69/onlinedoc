@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 $title = "Kirjaudu sisään";
@@ -8,13 +7,13 @@ function test_input($data)
 {
 	$data = trim($data);
 	$data = stripslashes($data);
-	$user = htmlspecialchars($data);
+	$data = htmlspecialchars($data);
 	return $data;
 }
 	$user = $_POST["username"];
 	$pw = $_POST["password"];
 	
-	$sql = "SELECT * FROM person WHERE typeid = 0";
+	$sql = "SELECT * FROM users WHERE typeid = 0";
 	
 	$result = $conn->query($sql);
 	if($result->num_rows > 0) 
@@ -36,6 +35,7 @@ function test_input($data)
 				$_SESSION["logged_in"] = 'yes';
 				$_SESSION['LAST_ACTIVITY'] = time();
 				header("location: home.php");
+				
 			}
 			else
 			{
@@ -44,41 +44,43 @@ function test_input($data)
 		}
 		}	
 	}
-if (empty($_SESSION["error"]))
-{
-	?>
-	<style type="text/css">
-	.boxerr{ display:none; }
-	</style>
-	<?php
-} else 
-{
-	?>
-	<style type="text/css">
-	.boxerr{ display:inline; }
-	</style>
-	<?php
-}
 ?>
 <div class="data">
-<a class="tooltip" href="#"><img src="question.png" class="ohje"><span>Syötä käyttäjätunnus ja salasana. Jos sinulla ei ole tunnuksia, voit rekisteröityä 'Rekisteröidy' linkistä.</span></a>
+<a class="tooltip" href="#"><img src="question.png" class="ohje" alt="Tästä kysymysmerkistä saat ohjeita"><span>Syötä käyttäjätunnus ja salasana. Jos sinulla ei ole tunnuksia, voit rekisteröityä 'Rekisteröidy' linkistä.</span></a>
+<?php
+if (!empty($_SESSION["error"]))
+{
+	?>
+<div class="bc">
 <div class="boxerr err">
-<span>Virhe: </span><?php echo $_SESSION["error"]; unset($_SESSION["error"]); ?>
-</div>
+<span><?php echo $_SESSION["error"]; unset($_SESSION["error"]); ?></span>
+</div></div>
+<?php }
+?>
+<?php
+if (!empty($_SESSION["msg"]))
+{
+	?>
+<div class="bc">
+<div class="boxsuc suc">
+<span><?php echo $_SESSION["msg"]; unset($_SESSION["msg"]); ?></span>
+</div></div>
+<?php }
+?>
 <h1>Sisäänkirjautuminen</h1>
 <div class="cc">
 <form action="#" method="post" class="minimal">
-	<label for="username"> Käyttäjätunnus:
-		<input type="text" name="username" placeholder="Kirjoita käyttäjätunnuksesi" required/>
-	</label>
-	<label for="password"> Salasana:
-		<input type="password" name="password" placeholder="Kirjoita salasanasi" required/>
-	</label>
-	<button type="submit" name="submit" class="button-minimal">Kirjaudu</button>
-	<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+	<label for="username"> Käyttäjätunnus:</label>
+		<input type="text" name="username"  id="username" placeholder="Kirjoita käyttäjätunnuksesi" required tabindex="1"/>
+	<label for="password"> Salasana:</label>
+		<input type="password" name="password" id="password" placeholder="Kirjoita salasanasi" required  tabindex="2"/>
+	<div class="bc">
+	<button type="submit" name="submit" class="button-minimal"  tabindex="3"><i class="fa fa-sign-in" aria-hidden="true"></i> Kirjaudu</button>
+	<button type="button" class="button-minimal" onclick="location.href='index.php'"  tabindex="4"><i class="fa fa-home" aria-hidden="true"></i> Etusivulle</button>
+	</div>
 </form>
-	<br><p>Unohtuiko salasana? <a href="forgot.php">Paina tästä saadaksesi uuden.</a></p>
 </div>
+	<br><a href="forgot.php" tabindex="5"><p style="text-align:center;">Unohtuiko salasana?</p></a>
 </div>
 <?php
 include_once 'footer1.php';

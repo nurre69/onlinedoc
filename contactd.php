@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 	$title = "Ota yhteys lääkäriin";
@@ -60,7 +59,7 @@ if (empty($_SESSION["msg"]))
 }
 ?>
 <div class="data">
-<a class="tooltip" href="#"><img src="question.png"><span>Kirjoita viestisi ylläpidolle ja paina 'Lähetä'!</span></a>
+<a class="tooltip" href="#"><img src="question.png" alt="ohjeita"><span>Kirjoita viestisi ylläpidolle ja paina 'Lähetä'!</span></a>
 <div class="boxerr err">
 <span><?php echo $_SESSION["error"]; unset($_SESSION["error"]); ?></span>
 </div>
@@ -72,14 +71,14 @@ if (empty($_SESSION["msg"]))
 <form method="post" class="basic">
 
 	<label for="subject">Aihe: </label>
-	<input type="text" name="subject" required>
+	<input type="text" name="subject" required id="subject" tabindex="1">
 
 	<label for="message">Viesti: </label>
-	<textarea autofocus style="resize: none; margin-left; auto; margin-right: auto; margin-top: 12px;" name="message" rows="7" cols="60" required></textarea><br><br>
+	<textarea autofocus style="resize: none; margin-left; auto; margin-right: auto; margin-top: 12px;" name="message" rows="7" cols="60" required id="message" tabindex="2"></textarea><br><br>
 
 	<div class="bc">
-	<button type="submit" class="button-minimal" name="send">Lähetä</button>
-	<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+	<button type="submit" class="button-minimal" name="send" tabindex="3"><i class="fa fa-reply" aria-hidden="true"></i> Lähetä viesti</button>
+	<button type="button" class="button-minimal" tabindex="4" onclick="history.go(-1);return true;"><i class="fa fa-history" aria-hidden="true"></i> Takaisin</button>
 	</div>
 </form>
 </div>

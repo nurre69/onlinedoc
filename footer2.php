@@ -1,22 +1,16 @@
 <nav>
 <ul class="menu">
-<?php 
-	if($title == 'Ota yhteyttä')
-	{
-?>		
-	<li><a href="about.php">> Tietoa meistä</a></li>
-	<li><a href="contact.php"><span class="active">>Ota yhteyttä</span></a></li>
-<?php }
-	elseif($title == 'Tietoa meistä') 
+<?php
+	if($title == 'Tietoa meistä') 
 	{
 ?>
-	<li><a href="about.php"><span class="active">> Tietoa meistä</span></a></li>
-	<li><a href="contact.php">> Ota yhteyttä</a></li>
+	<li class="active"><a href="about.php"><i class="fa fa-info-circle" aria-hidden="true"></i> Tietoa meistä</a></li>
+	<li style="float:right;"><a href="profile.php"><i class="fa fa-check-circle-o" aria-hidden="true"></i> <?php echo "Kirjautuneena: " . $_SESSION["fn"] . " " . $_SESSION["ln"]; ?></a></li>
 <?php }
 	else {
 ?>			
-	<li><a href="about.php">> Tietoa meistä</a></li>
-	<li><a href="contact.php">> Ota yhteyttä</a></li>
+	<li><a href="about.php"><i class="fa fa-info-circle" aria-hidden="true"></i> Tietoa meistä</a></li>
+	<li style="float:right;"><a href="profile.php"><i class="fa fa-check-circle-o" aria-hidden="true"></i> <?php echo "Kirjautuneena: " . $_SESSION["fn"] . " " . $_SESSION["ln"]; ?></a></li>
 <?php
 	}
 ?>

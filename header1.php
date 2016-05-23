@@ -13,29 +13,58 @@
 				} 
 			</script>
 		<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 	</head>
 <body>
 <div class="bg">
-<img class="logo" src="drlogo.png">
+    <a href="home.php"  tabindex="10">
+        <img class="logo" src="drlogo.png" onclick="location.href='index.php'">
+    </a>
 <nav>
 <ul class="menu">
 <?php 
 	if($title == 'Kirjaudu sisään')
 	{
 ?>		
-	<li><a href="login.php"><span class="active">> Kirjaudu sisään</span></a></li>
-	<li><a href="register.php">> Rekisteröidy</a></li>
+	<li class="active"><a href="login.php" tabindex="11"><i class="fa fa-sign-in" aria-hidden="true"></i> Kirjaudu sisään</a></li>
+	<li><a href="register.php" tabindex="12"><i class="fa fa-user-plus" aria-hidden="true"></i> Rekisteröityminen</a></li>
+	<li><a href="#" tabindex="13"><i class="fa fa-envelope" aria-hidden="true"></i> Yhteydenotto</a>
+	<ul>
+			<li><a href="contact2.php" tabindex="14"><i class="fa fa-optin-monster" aria-hidden="true"></i> Ota yhteys ylläpitoon</a></li>
+	</ul>
+	</li>
 <?php }
-	elseif($title == 'Rekisteröidy') 
+	elseif($title == 'Rekisteröityminen') 
 	{
 ?>
-	<li><a href="login.php">> Kirjaudu sisään</a></li>
-	<li><a href="register.php"><span class="active">> Rekisteröidy</span></a></li>
+	<li><a href="login.php" tabindex="11"><i class="fa fa-sign-in" aria-hidden="true"></i> Kirjaudu sisään</a></li>
+	<li class="active"><a href="register.php" tabindex="12"><i class="fa fa-user-plus" aria-hidden="true"></i> Rekisteröityminen</a></li>
+	<li><a href="#" tabindex="13"><i class="fa fa-envelope" aria-hidden="true"></i> Yhteydenotto</a>
+	<ul>
+			<li><a href="contact2.php" tabindex="14"><i class="fa fa-optin-monster" aria-hidden="true"></i> Ota yhteys ylläpitoon</a></li>
+	</ul>
+	</li>
+<?php }
+	elseif($title == 'Ota yhteyttä') 
+	{
+?>
+	<li><a href="login.php" tabindex="11"><i class="fa fa-sign-in" aria-hidden="true"></i> Kirjaudu sisään</a></li>
+	<li><a href="register.php" tabindex="12"><i class="fa fa-user-plus" aria-hidden="true"></i> Rekisteröityminen</a></li>
+	<li class="active"><a href="#" tabindex="13"><i class="fa fa-envelope" aria-hidden="true"></i> Yhteydenotto</a>
+	<ul>
+			<li class="active"><a href="contact2.php" tabindex="14"><i class="fa fa-optin-monster" aria-hidden="true"></i> Ota yhteys ylläpitoon</a></li>
+	</ul>
+	</li>
 <?php }
 	else {
 ?>			
-	<li><a href="login.php">> Kirjaudu sisään</a></li>
-	<li><a href="register.php">> Rekisteröidy</a></li>
+	<li><a href="login.php" tabindex="11"><i class="fa fa-sign-in" aria-hidden="true"></i> Kirjaudu sisään</a></li>
+	<li><a href="register.php" tabindex="12"><i class="fa fa-user-plus" aria-hidden="true"></i> Rekisteröityminen</a></li>
+	<li><a href="#" tabindex="13"><i class="fa fa-envelope" aria-hidden="true"></i> Yhteydenotto</a>
+	<ul>
+			<li><a href="contact2.php" tabindex="14"><i class="fa fa-optin-monster" aria-hidden="true"></i> Ota yhteys ylläpitoon</a></li>
+	</ul>
+	</li>
 <?php
 	}
 ?>

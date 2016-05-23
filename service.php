@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 	$title = "Tulosten tulkinta";
@@ -88,26 +87,28 @@ if($result->num_rows > 0)
 		{
 			while($row = $result->fetch_assoc()) 
 			{	
-					$mittaus = "Lämpötila :"; 
+					$mittaus = "Ruumiinlämpö :"; 
 					$arvo = str_replace(',', '.', $row["value"]);
 					$aika = $row["timestamp"];
 					$aika = date("d.m.Y H.i.s", strtotime($aika));
 					$aika = explode(" ", $aika);
 					if ($arvo < 34){ 
-						$viesti3 = "Lämpötilasi on alhainen, hakeudu lääkäriin."; 
+						$box4 = "boxerr err";
+						$viesti3 = "Ruumiinlämpösi on alhainen, hakeudu lääkäriin."; 
 					}
 					elseif ($arvo > 37){ 
-						$viesti3 = "Lämpötilasi on kohonnut, hakeudu lääkäriin."; 
+						$box4 = "boxerr err";
+						$viesti3 = "Ruumiinlämpösi on kohonnut, hakeudu lääkäriin."; 
 					}
 					else {
-						$viesti3 = "Lämpötilasi on normaalilla tasolla.";
+						$viesti3 = "Ruumiinlämpösi on normaalilla tasolla.";
 					}
-					$tulos3 = $arvo." &deg".$row["measurement_unit"].", mittausaika: ".$aika[0].", klo: ".$aika[1]."<br>"."<br>"."<br>";
+					$tulos3 = $arvo." &deg;".$row["measurement_unit"].", mittausaika: ".$aika[0].", klo: ".$aika[1]."<br>"."<br>"."<br>";
 				}
 		}
 $sql = "select m.*, m_t.measurement_unit from measurements m 
 			inner join measurement_type m_t on m_t.typeid = m.typeid
-			where m.ssn = '$ssn' and m.typeid = 5 order by timestamp desc limit 1";
+			where m.ssn = '$ssn' and m.typeid = 4 order by timestamp desc limit 1";
 $result = $conn->query($sql);
 if($result->num_rows > 0) 
 		{
@@ -123,7 +124,7 @@ if($result->num_rows > 0)
 		}
 $sql = "select m.*, m_t.measurement_unit from measurements m 
 			inner join measurement_type m_t on m_t.typeid = m.typeid
-			where m.ssn = '$ssn' and m.typeid = 6 order by timestamp desc limit 1";
+			where m.ssn = '$ssn' and m.typeid = 5 order by timestamp desc limit 1";
 $result = $conn->query($sql);
 if($result->num_rows > 0) 
 		{
@@ -138,8 +139,10 @@ if($result->num_rows > 0)
 					$bmi = $paino/$pituus;
 					$bmi = number_format((float)$bmi, 1, '.', '');
 					if ($bmi < 18.5) {
+						$box4 = "boxerr err";
 						$viesti4 = "Painoindeksi: ". $bmi .". Olet hieman alipainoinen.";
 					} elseif ($bmi > 24.9) {
+						$box4 = "boxerr err";
 						$viesti4 = "Painoindeksi: ". $bmi .". Olet hieman ylipainoinen.";
 					} else {
 						$viesti4 = "Painoindeksi: ". $bmi .". Olet normaalipainoinen.";
@@ -148,9 +151,26 @@ if($result->num_rows > 0)
 		} 
 ?>
 <div class="data">
-<a class="tooltip" href="#"><img src="question.png"><span>Tällä sivulla näet tuloksiesi perusteella tehdyt tulkinnat!</span></a>
+<a class="tooltip" href="#"><img src="question.png" alt="Ohje!"><span>Tällä sivulla näet tuloksiesi perusteella tehdyt tulkinnat!</span></a>
 <div class="cc">
-<div class="laatikko1">
+<div class="laatikkovs">
+<?php
+$sql = "select value from measurements m 
+			inner join measurement_type m_t on m_t.typeid = m.typeid
+			where m.ssn = '$ssn' and m.typeid = 1 order by timestamp desc limit 1";
+			$result = $conn->query($sql);
+			if($result->num_rows < 1) { ?>
+			<style type="text/css">
+			.laatikkovs { display:none; }
+			</style>
+			<?php
+			} else { ?>
+			<style type="text/css">
+			.laatikkovs { display:block; }
+			</style>
+			<?php	
+			}
+?>
 <p class="arvo">
 Verensokeri:
 </p>
@@ -159,8 +179,24 @@ Verensokeri:
 <span><?php echo $viesti1; ?></span>
 </div>
 </div>
-
-<div class="laatikko1">
+<div class="laatikkovp">
+<?php
+$sql = "select value from measurements m 
+			inner join measurement_type m_t on m_t.typeid = m.typeid
+			where m.ssn = '$ssn' and m.typeid = 2 order by timestamp desc limit 1";
+			$result = $conn->query($sql);
+			if($result->num_rows < 1) { ?>
+			<style type="text/css">
+			.laatikkovp { display:none; }
+			</style>
+			<?php
+			} else { ?>
+			<style type="text/css">
+			.laatikkovp { display:block; }
+			</style>
+			<?php	
+			}
+?>
 <p class="arvo">
 Verenpaine:
 </p>
@@ -169,10 +205,26 @@ Verenpaine:
 <span><?php echo $viesti2; ?></span>
 </div>
 </div>
-
-<div class="laatikko1">
+<div class="laatikkorl">
+<?php
+$sql = "select value from measurements m 
+			inner join measurement_type m_t on m_t.typeid = m.typeid
+			where m.ssn = '$ssn' and m.typeid = 3 order by timestamp desc limit 1";
+			$result = $conn->query($sql);
+			if($result->num_rows < 1) { ?>
+			<style type="text/css">
+			.laatikkorl { display:none; }
+			</style>
+			<?php
+			} else { ?>
+			<style type="text/css">
+			.laatikkorl { display:block; }
+			</style>
+			<?php	
+			}
+?>
 <p class="arvo">
-Lämpötila:
+Ruumiinlämpö:
 </p>
 <?php echo $tulos3; ?>
 <div class="boxnot not" style="display: inline">
@@ -192,8 +244,8 @@ Paino ja pituus:
 </div>
 </div>
 <div class="bc">
-<button type="button" onclick="location.href='feedback.php'" class="button-minimal">Valmis</button>
-<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+<button type="button" onclick="location.href='home.php'" class="button-minimal"><i class="fa fa-home" aria-hidden="true"></i> Etusivulle</button>
+<button type="button" class="button-minimal" onclick="history.go(-1);return true;"><i class="fa fa-history" aria-hidden="true"></i> Takaisin</button>
 </div>
 </div>		
 <?php

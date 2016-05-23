@@ -21,17 +21,12 @@ $_SESSION['LAST_ACTIVITY'] = time();
 Jos haluat aloittaa palvelun käytön helppojen vaiheiden avulla, paina aloita:<br>
 </p>
 <div class="bc">
-<button type="button" class="button-minimal" onclick="location.href='insert2.php'">ALOITA</button>
+<button type="button" class="button-minimal" onclick="location.href='insert2.php'" tabindex="1"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> ALOITA</button><br><br>
 </div>
 <p style="text-align:center">
-Tai vaihtoehtoisesti voit käyttää palvelua vapaasti:<br><br>
-Jos haluat katsella tai muuttaa omia terveystietojasti, valitse Mittaustulokset.<br>
-Jos haluat tarkastella toimenpiteitä omien tuloksiesi perusteella, valitse Tulosten tulkinta.<br>
-Jos haluat katsella tai muuttaa omia tietojasi, valitse Henkilötiedot.<br>
-Jos haluat ottaa yhteyttä palvelun ylläpitoon, valitse Ota yhteyttä.<br>
-Jos haluat kirjautua ulos, valitse Kirjaudu ulos.<br><br>
+Tai vaihtoehtoisesti voit käyttää palvelua vapaasti Toiminnot -valikosta.<br><br>
 </p>
-<h3>Joka sivulta löydät ohjeet kysymysmerkkikuvakeesta: </h3><img class="c" src="question.png">
+<h3>Joka sivulta löydät ohjeet kysymysmerkistä: </h3><img class="c" src="question.png" alt="Ohjeet">
 </div>
 <?php
 include_once 'footer2.php';

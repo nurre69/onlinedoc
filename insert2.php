@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 	$title = "Syötä mittaustuloksia";
@@ -22,198 +21,160 @@ function test_input($data)
 	return $data;
 }
 	include 'connection.php';
-	$typeid = test_input($_POST["mittari"]);
 	$ssn = $_SESSION["ssn"];
-	$arvo = test_input($_POST["value"]);
-	$laskuri = 0;
+	$verensokeri = $_POST["verensokeri"];
+	$verenpaine = $_POST["verenpaine"];
+	$lämpötila = $_POST["lämpötila"];
+	$paino = $_POST["paino"];
+	$pituus = $_POST["pituus"];
 	
-	if($typeid == '1')  
-	{
-		if ($arvo <= 0) 
-		{
-			$_SESSION["error"] = "Sokeriarvo täytyy olla suurempi kuin 0!";
-		}
-		elseif ($arvo <= 2 || $arvo >= 20){
-			$_SESSION["error"] = "Syötä realistisia arvoja!"; 
-		}
-		elseif (preg_match('/^([0-9]{1,2}),([0-9]{1})|([0-9]{1,2})$/', $arvo)){ 
-			$sql = "INSERT INTO measurements (value, typeid, ssn)
-				VALUES ('$arvo', '$typeid', '$ssn')";
-			
-			$result = $conn->query($sql);
-	
-			if(!$result)	{ $_SESSION["error"] = "Pieleen meni!"; }
-	
-			else 	
-			{
-				$_SESSION["msg"] = "Mittaustulokset tallennettu.";
-				
-				$arvo = str_replace(',', '.', $arvo);
+	if (isset($_POST['submit'])){
+		if (!empty($_POST["pituus"])) {
+			if ($pituus <= 0){
+				$_SESSION["error"] = "Pituuden täytyy olla suurempi kuin 0!"; 
 			}
-		} else {
-			$_SESSION["error"] = "Sokeriarvo pitää syöttää muodossa x,x!";
-		}
-	}
-	if($typeid == '2')
-	{
-		$paine = explode("/",$arvo);
-		if ($arvo <= 0)
-		{
-			$_SESSION["error"] = "Verenpaine täytyy olla suurempi kuin 0!"; 
-		}
-		elseif ($paine[0] <= 70 || $paine[0] >= 200){
-			$_SESSION["error"] = "Syötä realistisia arvoja!"; 
-		}
-		elseif ($paine[1] <= 40 || $paine[1] >= 130){
-			$_SESSION["error"] = "Syötä realistisia arvoja!"; 
-		}
-		elseif (preg_match("~^([0-9]{2,3})[/]([0-9]{2,3})$~", $arvo)){ 
-			$sql = "INSERT INTO measurements (value, typeid, ssn)
-			VALUES ('$arvo', '$typeid', '$ssn')";
-			
-			$result = $conn->query($sql);
-	
-			if(!$result) { $_SESSION["error"] = "Pieleen meni!"; }
-	
-			else 	
-			{
-				$_SESSION["msg"] = "Mittaustulokset tallennettu.";
+			elseif ($pituus <= 100 || $pituus >= 230){
+				$_SESSION["error"] = "Syötä realistisia arvoja!"; 
 			}
-		} else {
-				$_SESSION["error"] = "Verenpaine pitää syöttää muodossa xx/xx!";
-		}
-	}
-	if($typeid == '3')
-	{
-		if ($arvo <= 0) 
-		{
-			$_SESSION["error"] = "Lämpötilan täytyy olla suurempi kuin 0!";
-		}
-		elseif ($arvo <= 30 || $arvo >= 50){
-			$_SESSION["error"] = "Syötä realistisia arvoja!"; 
-		}
-		elseif (preg_match('/^([0-9]{2}),([0-9]{1})|([0-9]{2})$/', $arvo)){
-		 	
-			$sql = "INSERT INTO measurements (value, typeid, ssn)
-			VALUES ('$arvo', '$typeid', '$ssn')";
-			
-			$result = $conn->query($sql);
-	
-			if(!$result)
-				{ $_SESSION["error"] = "Pieleen meni!"; }
-			else 	
-			{
-				$_SESSION["msg"] = "Mittaustulokset tallennettu.";
-			}	
-		} else {
-			$_SESSION["error"] = "Lämpötila pitää syöttää muodossa xx,x!"; 
-		}
-	}
-	if($typeid == '4')
-	{
-		if ($arvo <= 0)
-		{
-			$_SESSION["error"] = "Painon täytyy olla suurempi kuin 0!"; 
-		}
-		elseif ($arvo <= 30 || $arvo >= 300){
-			$_SESSION["error"] = "Syötä realistisia arvoja!"; 
-		}
-		elseif (preg_match('/^([0-9]{2,3})|([0-9]{2,3},[0-9]{1})$/', $arvo)){
-			$sql = "INSERT INTO measurements (value, typeid, ssn)
-			VALUES ('$arvo', '5', '$ssn')";
-			
-			$result = $conn->query($sql);
-	
-			if(!$result)
-				{ $_SESSION["error"] = "Pieleen meni!"; }
-			else 	
-			{
-				$_SESSION["msg"] = "Mittaustulokset tallennettu. ";
-			}
-		} else {
-			$_SESSION["error"] = "Paino pitää syöttää muodossa xx,x!"; 
-		}
-	}	
-	if($typeid == '5')
-	{
-		if ($arvo <= 0){
-			$_SESSION["error"] = "Pituuden täytyy olla suurempi kuin 0!"; 
-		}
-		elseif ($arvo <= 100 || $arvo >= 230){
-			$_SESSION["error"] = "Syötä realistisia arvoja!"; 
-		}
-		elseif (preg_match('/^([0-9]{2,3},[0-9]{1})|([0-9]{2,3})$/', $arvo)){
-			$sql = "INSERT INTO measurements (value, typeid, ssn)
-			VALUES ('$arvo', '6', '$ssn')";
-			
-			$result = $conn->query($sql);
-	
-			if(!$result)
-				{ $_SESSION["error"] = "Pieleen meni!"; }
-			else 	
-			{
-				$_SESSION["msg"] = "Mittaustulokset tallennettu.";
-			}
-		} else {
+			elseif (preg_match('/^([0-9]{2,3},[0-9]{1})|([0-9]{2,3})$/', $pituus)){
+				$sql = "INSERT INTO measurements (value, typeid, ssn) VALUES('$pituus', '5', '$ssn')";
+				$result = $conn->query($sql);
+				if(!$result) { 
+					$_SESSION["error"] = "Pieleen meni!"; 
+				}
+			} else {
 			$_SESSION["error"] = "Pituus pitää syöttää muodossa xx,x!"; 
+			}	
 		}
+		if (!empty($_POST["paino"])) {
+			if ($paino <= 0)
+			{
+				$_SESSION["error"] = "Painon täytyy olla suurempi kuin 0!"; 
+			}
+			elseif ($paino <= 30 || $paino >= 300){
+				$_SESSION["error"] = "Syötä realistisia arvoja!"; 
+			}
+			elseif (preg_match('/^([0-9]{2,3})|([0-9]{2,3},[0-9]{1})$/', $paino)){
+				$sql = "INSERT INTO measurements (value, typeid, ssn) VALUES('$paino', '4', '$ssn')";
+				$result = $conn->query($sql);
+				if(!$result) { 
+					$_SESSION["error"] = "Pieleen meni!"; 
+				}
+			} else {
+			$_SESSION["error"] = "Paino pitää syöttää muodossa xx,x!"; 
+			}
+			}
+		if (!empty($_POST["lämpötila"])) {
+			if ($lämpötila <= 0) 
+			{
+				$_SESSION["error"] = "Ruumiinlämmön täytyy olla suurempi kuin 0!";
+			}
+			elseif ($lämpötila <= 30 || $lämpötila >= 50){
+				$_SESSION["error"] = "Syötä realistisia arvoja!"; 
+			}
+			elseif (preg_match('/^([0-9]{2}),([0-9]{1})|([0-9]{2})$/', $lämpötila)){
+				$sql = "INSERT INTO measurements (value, typeid, ssn) VALUES('$lämpötila', '3', '$ssn')";
+				$result = $conn->query($sql);
+				if(!$result) { 
+					$_SESSION["error"] = "Pieleen meni!"; 
+				}
+			} else {
+			$_SESSION["error"] = "Ruumiinlämpö pitää syöttää muodossa xx,x!"; 
+			}
+			}
+		if (!empty($_POST["verenpaine"])) {
+			$paine = explode("/",$verenpaine);
+			if ($verenpaine <= 0)
+			{
+				$_SESSION["error"] = "Verenpaine täytyy olla suurempi kuin 0!"; 
+			}
+			elseif ($paine[0] <= 70 || $paine[0] >= 200){
+				$_SESSION["error"] = "Syötä realistisia arvoja!"; 
+			}
+			elseif ($paine[1] <= 40 || $paine[1] >= 130){
+				$_SESSION["error"] = "Syötä realistisia arvoja!"; 
+			}
+			elseif (preg_match("~^([0-9]{2,3})[/]([0-9]{2,3})$~", $verenpaine)){
+				$sql = "INSERT INTO measurements (value, typeid, ssn) VALUES('$verenpaine', '2', '$ssn')";
+				$result = $conn->query($sql);
+				if(!$result) { 
+					$_SESSION["error"] = "Pieleen meni!"; 
+				}
+			} else {
+				$_SESSION["error"] = "Verenpaine pitää syöttää muodossa xx/xx!";
+			}
+			}
+		if (!empty($_POST["verensokeri"])) {
+			if ($verensokeri <= 0) 
+			{
+			$_SESSION["error"] = "Sokeriarvo täytyy olla suurempi kuin 0!";
+			}
+			elseif ($verensokeri <= 2 || $verensokeri >= 20){
+				$_SESSION["error"] = "Syötä realistisia arvoja!"; 
+			}
+			elseif (preg_match('/^([0-9]{1,2}),([0-9]{1})|([0-9]{1,2})$/', $verensokeri)){ 
+				$sql = "INSERT INTO measurements (value, typeid, ssn) VALUES('$verensokeri', '1', '$ssn')";
+				$result = $conn->query($sql);
+				if(!$result) { 
+					$_SESSION["error"] = "Pieleen meni!"; 
+				}
+			} else {
+			$_SESSION["error"] = "Sokeriarvo pitää syöttää muodossa x,x!";
+			}
+			}
+		if (empty($_SESSION["error"])) {
+			$_SESSION["msg"] = "Mittaustulokset hyväksytty, siirryt kohta seuraavaan vaiheeseen."; 
+		}
+		
 	}
-if (empty($_SESSION["error"]))
-{
-	?>
-	<style type="text/css">
-	.boxerr { display:none; }
-	</style>
-	<?php
-} else 
-{
-	?>
-	<style type="text/css">
-	.boxerr { display:inline; }
-	</style>
-	<?php
-}
-if (empty($_SESSION["msg"]))
-{
-	?>
-	<style type="text/css">
-	.boxsuc { display:none; }
-	</style>
-	<?php
-} else 
-{
-	?>
-	<style type="text/css">
-	.boxsuc { display:inline; }
-	</style>
-	<?php
-}
+if ($_SESSION["msg"] == "Mittaustulokset hyväksytty, siirryt kohta seuraavaan vaiheeseen.") { ?>
+<script type="text/javascript">
+(function(){
+   setTimeout(function(){
+     window.location="http://users.metropolia.fi/~niikan/confirm.php";
+   },3000); /* 1000 = 1 second*/
+})();
+</script>
+<?php }
 ?>
 <div class="data">
-<a class="tooltip" href="#"><img src="question.png"><span>Valitse mittauksesi tyyppi ja syötä arvo alla olevaan kenttään ja paina 'Lähetä'! Kun olet syöttänyt kaikki tiedot, paina 'Seuraava'!</span></a>
+<a class="tooltip" href="#"><img src="question.png" alt="ohjeita"><span>Valitse mittauksesi tyyppi ja syötä arvo alla olevaan kenttään ja paina 'Lähetä'! Kun olet syöttänyt kaikki tiedot, paina 'Seuraava'!</span></a>
+<?php
+if (!empty($_SESSION["error"]))
+{
+	?>
+<div class="bc">
 <div class="boxerr err">
 <span><?php echo $_SESSION["error"]; unset($_SESSION["error"]); ?></span>
-</div>
+</div></div>
+<?php }
+?>
+<?php
+if (!empty($_SESSION["msg"]))
+{
+	?>
+<div class="bc">
 <div class="boxsuc suc">
 <span><?php echo $_SESSION["msg"]; unset($_SESSION["msg"]); ?></span>
-</div>
-<div class="cc">
+</div></div>
+<?php }
+?>
 <h2>Vaihe 1; syötä mittaustietosi: </h2>
-	<form action="#" method="post" class="basic2">
-		<label for="mittari">Mittauksen tyyppi: </label>
-		<select size="1" name="mittari">
-		<option value="1">Verensokeri</option>
-		<option value="2">Verenpaine</option>
-		<option value="3">Lämpötila</option>
-		<option value="4" >Paino</option>
-		<option value="5" >Pituus</option>	
-		</select><br>
-		<label for="value">Mitattu arvo: </label>
-		<input type="text" name="value" required><br><br>
+<div class="cc">
+	<form action="#" method="post" class="minimal">
+		<label for="verensokeri">Verensokeri: </label>
+		<input type="text" name="verensokeri" id="verensokeri"><br>
+		<label for="verenpaine">Verenpaine: </label>
+		<input type="text" name="verenpaine" id="verenpaine"><br>
+		<label for="lämpötila">Ruumiinlämpö: </label>
+		<input type="text" name="lämpötila" id="lämpötila"><br>
+		<label for="paino">Paino: </label>
+		<input type="text" name="paino" id="paino"><br>
+		<label for="pituus">Pituus: </label>
+		<input type="text" name="pituus" id="pituus"><br>
 <div class="bc">
-<button type="submit" name="submit" class="button-minimal">Lähetä</button>
-<button type="button" onclick="location.href='confirm.php'" class="button-minimal">Seuraava</button>
-<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+<button type="submit" name="submit" class="button-minimal"><i class="fa fa-arrow-circle-right" aria-hidden="true"></i> Seuraava</button>
+<button type="button" class="button-minimal" onclick="history.go(-1);return true;"><i class="fa fa-history" aria-hidden="true"></i>Takaisin</button>
 </div>
 </form>
 </div>

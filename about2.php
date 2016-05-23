@@ -9,7 +9,7 @@ include_once 'header1.php';
 Olemme kolme mediaseksikästä ja retroseksuaalista hyvinvointiteknologian opiskelijaa. Kiitos.<br><br>
 </p>
 <div class="bc">
-<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+<button type="button" class="button-minimal" onclick="history.go(-1);return true;"><i class="fa fa-history" aria-hidden="true"></i> Takaisin</button>
 </div>
 </div>
 <?php

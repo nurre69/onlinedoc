@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 session_start();
 	$title = "Henkilötiedot";
@@ -16,7 +15,8 @@ if($_SESSION["logged_in"] == 'yes'){
 $_SESSION['LAST_ACTIVITY'] = time();
 ?>
 <div class="data">
-<a class="tooltip" href="#"><img src="question.png"><span>Tästä näet omat henkilökohtaiset tietosi. Voit muuttaa niitä painamalla 'Muuta tietoja'!</span></a>
+<a class="tooltip" href="#"><img src="question.png" alt="ohjeita"><span>Tästä näet omat henkilökohtaiset tietosi. Voit muuttaa niitä painamalla 'Muuta tietoja'!</span></a>
+<h2>Omat henkilötiedot:</h2>
 <div class="laatikko1">
 <?php echo "Asiakas: " . $_SESSION["fn"] . " " . $_SESSION["ln"]; ?>
 </div>
@@ -39,8 +39,8 @@ $_SESSION['LAST_ACTIVITY'] = time();
 <?php echo "Salasana: " . $_SESSION["password"]; ?>
 </div><br>
 <div class="bc">
-<button type="button" class="button-minimal" onclick="location.href='change.php'">Muuta tietoja</button>
-<button type="button" class="button-minimal" onclick="history.go(-1);return true;">Takaisin</button>
+<button type="button" class="button-minimal" onclick="location.href='change.php'"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Muuta henkilötietoja</button>
+<button type="button" class="button-minimal" onclick="history.go(-1);return true;"><i class="fa fa-history" aria-hidden="true"></i> Takaisin</button>
 </div>
 </div>
 <?php

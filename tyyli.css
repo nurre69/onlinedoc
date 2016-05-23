@@ -21,6 +21,17 @@ body {
 	margin-top: 5px;
 	margin-bottom: 10px;
 }
+.basic3 select {
+	width: 170px;
+    padding:5px 8px;
+	border:1px solid #aaa;
+    box-shadow: 0px 0px 3px #ccc, 0 10px 15px #eee inset;
+    border-radius:2px;
+	font-size: inherit;
+	cursor: pointer;
+	margin-top: 5px;
+	margin-bottom: 10px;
+}
 .basic2 input[type="text"] { 
     width:152px; 
     padding:5px 8px;
@@ -30,6 +41,7 @@ body {
 	margin-top: 5px;
 	margin-bottom: 10px;
 }
+
 .basic2 input[type="email"] { 
     width:152px; 
     padding:5px 8px;
@@ -38,6 +50,22 @@ body {
     border-radius:2px;
 	margin-top: 15px;
 	margin-bottom: 10px;
+}
+.basic2 input:focus {
+	background: white;
+    border-color: #4195fc;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+	color: rgb(0,0,0);
+}
+.basic2 input:hover {
+	background: white;
+    border-color: #4195fc;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
+	color: rgb(0,0,0);
 }
 input[type=range] {
   -webkit-appearance: none;
@@ -87,17 +115,18 @@ input[type=range]:focus::-webkit-slider-runnable-track {
 input[type=range]::-webkit-slider-thumb {
   -webkit-appearance: none;
   border: 1px solid #000000;
-  height: 36px;
+  height: 26px;
   width: 16px;
   border-radius: 3px;
   background: #ffffff;
   cursor: pointer;
-  margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  margin-top: -10px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
 }
 input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 100%; /* Specific width is required for Firefox. */
+  width: 160px; /* Specific width is required for Firefox. */
+  margin-right: 10px;
 }
 
 input[type=range]::-webkit-slider-thumb {
@@ -108,7 +137,7 @@ input[type=range]:focus {
   outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
 }
 .basic2 label {
-	width: 120px;
+	width: 140px;
     margin-top: 8px;
     display:inline-block;
     float:left;
@@ -116,8 +145,7 @@ input[type=range]:focus {
 	font-size: 14px;
 }
 .lista {
-	width: 40%; 
-	margin: auto;
+ 
 	font-size: 14px;
 }
 .basic input[type="text"],
@@ -174,7 +202,6 @@ h4 {
   color: #000000; outline: none;
   cursor: help; text-decoration: none;
   position: relative;
-  float: right;
 }
 .tooltip span {
   margin-left: -999em;
@@ -199,13 +226,16 @@ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
 -moz-box-shadow: 5px 5px rgba(0, 0, 0, 0.1);
 }
 .active {
-	border-bottom: 1px solid white;
+	background-color: #4a7eb3;
 }
 .logo {
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 5px 0 5px 0;
+}
+.logo:hover {
+	cursor: pointer;
 }
 .c {
 	display: block;
@@ -219,20 +249,13 @@ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     font-family: Arimo;
 	font-size:13px;
     padding:10px 10px 10px 36px;
-    margin:10px;
-	width: auto;
-	max-width: 100%;
-	margin-bottom: 10px;
 }
 .boxsuc {
     color:#555;
     border-radius:10px;
-   font-family: Arimo;
+    font-family: Arimo;
 	font-size:13px;
-    padding:10px 10px 10px 36px;
-    margin:10px;
-	width: auto;
-	max-width: 100%;
+	padding:10px 10px 10px 36px;
 }
 .boxwar {
     color:#555;
@@ -240,9 +263,6 @@ box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);
     font-family: Arimo;
 	font-size:13px;
     padding:10px 10px 10px 36px;
-    margin:10px;
-	width: auto;
-	max-width: 100%;
 }
 .boxnot {
     color:#555;
@@ -322,10 +342,6 @@ p {
     background: -o-linear-gradient(top, #2a547f 0%,#07003a 100%);
     background: -ms-linear-gradient(top, #2a547f 0%,#07003a 100%);
     background: linear-gradient(top, #2a547f 0%,#07003a 100%);
- 
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
 }
 .menu li {
     position: relative;
@@ -376,6 +392,9 @@ p {
 	text-shadow: 2px 2px 10px #FFFFFF;
     filter: dropshadow(color=#FFFFFF, offx=2, offy=2);
 }
+.menu li:hover {
+	background-color: #4a7eb3;
+}
 .menu ul {
     position: absolute;
     top: 40px;
@@ -388,10 +407,6 @@ p {
     background: -o-linear-gradient(top, #2a547f 0%,#07003a 100%);
     background: -ms-linear-gradient(top, #2a547f 0%,#07003a 100%);
     background: linear-gradient(top, #2a547f 0%,#07003a 100%);
- 
-    -webkit-border-radius: 0 0 5px 5px;
-    -moz-border-radius: 0 0 5px 5px;
-    border-radius: 0 0 5px 5px;
  
     -webkit-transition: opacity .25s ease .1s;
     -moz-transition: opacity .25s ease .1s;
@@ -448,7 +463,37 @@ p {
 	padding: 5px;
 	margin: 0 auto;
 	margin-top: 20px;
-	margin-bottom: 10px;
+	font-size: 14px;
+	width: 500px;
+}
+.laatikkovs {
+	border: 1px solid black;
+	background: white;
+	text-align: center;
+	padding: 5px;
+	margin: 0 auto;
+	margin-top: 20px;
+	font-size: 14px;
+	width: 500px;
+}
+.laatikkovp {
+	border: 1px solid black;
+	background: white;
+	text-align: center;
+	padding: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 20px;
+	font-size: 14px;
+	width: 500px;
+}
+.laatikkorl {
+	border: 1px solid black;
+	background: white;
+	text-align: center;
+	padding: 5px;
+	margin: 0 auto;
+	margin-top: 20px;
 	font-size: 14px;
 	width: 500px;
 }
@@ -484,11 +529,12 @@ p {
 .cc {
 	margin-left: auto;
 	margin-right: auto;
-	width: fit-content;
+	width: 400px;
 }
 .bc {
 	margin-left: auto;
 	margin-right: auto;
+	width: fit-content;
 	text-align: center;
 }
 footer {
@@ -586,6 +632,7 @@ input[type=submit]{
     padding:6px 6px 6px 0;
 	width: 110px;
 	margin-right: 7px;
+	margin-left: 7px;
 	font-size: 14px;
 }
 .register input[type="radio"]{
@@ -617,7 +664,7 @@ input[type=submit]{
 }
 .register input:required:hover:valid {
 	background: white;
-  border-color: #4195fc;
+    border-color: #4195fc;
 	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
 	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
@@ -632,11 +679,12 @@ input[type=submit]{
 	color: rgb(0,0,0);
 }
 .register input:hover {
-    border-color: #4195fc;
+    background: white;
+	border-color: #4195fc;
 	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
 	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
-	background: black;
+	color: rgb(0,0,0);
 }
 .register input:focus:invalid {
 	background: #fff url(red.png) no-repeat 98% center;
@@ -683,6 +731,52 @@ input[type=submit]{
 	margin-left: auto;
 	margin-right: auto;
 }
+.minimal select {
+	background-color: rgb(255,255,255);
+	border: 1px solid rgb( 186, 186, 186 );
+	border-radius: 2px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+	display: block;
+	font-size: 14px;
+	margin: 10px 0 10px 0;
+	padding: 8px;
+	width: 318px;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+	margin-left: auto;
+	margin-right: auto;
+
+	
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	  transition: all 0.1s linear;
+}
+.minimal textarea {
+	resize: none;
+	margin-top: 12px;
+	background-color: rgb(255,255,255);
+	border: 1px solid rgb( 186, 186, 186 );
+	border-radius: 2px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+	display: block;
+	font-size: 14px;
+	margin: 10px 0 10px 0;
+	padding: 8px;
+	width: 300px;
+	text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
+	margin-left: auto;
+	margin-right: auto;
+
+	
+	-webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	  transition: all 0.1s linear;
+}
 .minimal input[type="text"],
 .minimal input[type="email"],
 .minimal input[type="password"]{
@@ -696,10 +790,10 @@ input[type=submit]{
 	font-size: 14px;
 	margin: 10px 0 10px 0;
 	padding: 8px;
-	width: 94%;
+	width: 300px;
 	text-shadow: 0 1px 1px rgba(255, 255, 255, 1);
-	width: 80wv;
-
+	margin-left: auto;
+	margin-right: auto;
 	
 	-webkit-transition: all 0.1s linear;
 	-moz-transition: all 0.1s linear;
@@ -709,6 +803,7 @@ input[type=submit]{
 .minimal label {
 	display: block;
 	font-size: 14px;
+	margin-left: 41px;
 }
 .minimal input[type="text"]:focus,
 .minimal input[type="email"]:focus,
@@ -722,4 +817,76 @@ input[type=submit]{
 	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
 	box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 8px #4195fc;
 	color: rgb(0,0,0);
+}
+#chartdiv {
+	overflow: scroll;  
+	background-color: white; 
+	width: 100%;
+	margin-bottom: 2vh;
+	margin-top: 2vh;											 
+	height: 400px;
+	font-family: Play; 
+	border-radius: 4px;
+	border: 1px solid black;
+}
+#tulos {
+	width: 95%;
+	margin: 5px auto;
+	font-weight: 300;
+	text-align: center;
+}
+
+
+.tulokset { 
+  color: #333;
+  width: 450px;
+	margin-bottom: 10px;
+  /* Table reset stuff */
+  border-collapse: collapse; border-spacing: 0;
+  text-align: center;
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+		
+td, th {  
+	border: 0 none; 
+	height: 30px;
+}
+			
+th {
+  /* Gradient Background */
+	background: #009ACD;
+	color: #FFF; font-weight: bold;
+	height: 30px;
+	border-right: 1px solid white;
+}
+th:last-child {
+	border-right: none;
+}
+		
+td { background: #FAFAFA; text-align: center; }
+
+/* Zebra Stripe Rows */
+		
+
+
+/* First-child blank cells! */
+tr td:first-child, tr th:first-child { 
+
+	font-weight: bold;
+	font-size: 14px;
+	text-align: right;
+	padding-right: 10px;
+	width: 80px; 
+	text-align: center;
+}
+
+/* Add border-radius to specific cells! */
+tr:first-child th:nth-child(2) { 
+  border-radius: 5px 0 0 0; 
+} 
+
+tr:first-child th:last-child { 
+  border-radius: 0 5px 0 0; 
 }
